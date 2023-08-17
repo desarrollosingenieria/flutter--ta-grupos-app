@@ -132,7 +132,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 SizedBox(
                   height: orientation == Orientation.portrait
                       ? mq.width * 0.04
-                      : mq.height * 0.04,
+                      : mq.height * 0.02,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -227,7 +227,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 SizedBox(
                   height: orientation == Orientation.portrait
                       ? mq.width * 0.04
-                      : mq.height * 0.04,
+                      : mq.height * 0.02,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -338,7 +338,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             : mq.height * 0.6,
                         height: orientation == Orientation.portrait
                             ? mq.width * 0.2
-                            : mq.height * 0.2,
+                            : mq.height * 0.1,
                         child: Text(
                           'Probar voz'.toUpperCase(),
                           style: TextStyle(
@@ -479,6 +479,92 @@ class _ConfigPageState extends State<ConfigPage> {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0, top: 40.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Estilo de teclado',
+                        style: TextStyle(
+                          fontSize: orientation == Orientation.portrait
+                              ? mq.width * configProvider.factorSize!
+                              : mq.height * configProvider.factorSize!,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF003A70),
+                        ),
+                      ),
+                      SizedBox(
+                        height: orientation == Orientation.portrait
+                            ? mq.width * 0.04
+                            : mq.height * 0.04,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Material(
+                            borderRadius: BorderRadius.circular(16),
+                            color: configProvider.highlightFont!
+                                ? Colors.grey[400]
+                                : Colors.blue,
+                            child: InkWell(
+                              onTap: () {
+                                configProvider.setHighlightFont(false);
+                              },
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                padding: const EdgeInsets.all(20),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Predeterminado',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: orientation ==
+                                            Orientation.portrait
+                                        ? mq.width * configProvider.factorSize!
+                                        : mq.height *
+                                            configProvider.factorSize!,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: orientation == Orientation.portrait
+                                ? mq.width * 0.02
+                                : mq.height * 0.02,
+                          ),
+                          Material(
+                            borderRadius: BorderRadius.circular(16),
+                            color: configProvider.highlightFont!
+                                ? Colors.blue
+                                : Colors.grey[400],
+                            child: InkWell(
+                              onTap: () {
+                                configProvider.setHighlightFont(true);
+                              },
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                padding: const EdgeInsets.all(20),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Letras resaltadas',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: orientation ==
+                                            Orientation.portrait
+                                        ? mq.width * configProvider.factorSize!
+                                        : mq.height *
+                                            configProvider.factorSize!,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: orientation == Orientation.portrait
                       ? mq.width * 0.08
@@ -492,22 +578,22 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Desarrollado por'.toUpperCase(),
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.03
-                              : mq.height * 0.03,
+                              ? mq.width * 0.02
+                              : mq.height * 0.02,
                           color: const Color(0xFF003A70),
                         ),
                       ),
                       SizedBox(
                         height: orientation == Orientation.portrait
                             ? mq.width * 0.02
-                            : mq.height * 0.02,
+                            : mq.height * 0.01,
                       ),
                       Text(
                         'Clínica de Tecnología Asistiva, FLENI',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.04
-                              : mq.height * 0.04,
+                              ? mq.width * 0.03
+                              : mq.height * 0.03,
                           color: const Color(0xFF003A70),
                         ),
                       ),
@@ -519,8 +605,8 @@ class _ConfigPageState extends State<ConfigPage> {
                       Image.asset(
                         'assets/images/fleni-logo.png',
                         width: orientation == Orientation.portrait
-                            ? mq.width * 0.6
-                            : mq.height * 0.6,
+                            ? mq.width * 0.5
+                            : mq.height * 0.5,
                       ),
                       SizedBox(
                         height: orientation == Orientation.portrait

@@ -60,6 +60,15 @@ class UserPreferences {
     _prefs.setString('factorText', factor);
   }
 
+  // GET y  SET highlightFont
+  bool get highlightFont {
+    return _prefs.getBool('highlightFont') ?? false;
+  }
+
+  set highlightFont(bool status) {
+    _prefs.setBool('highlightFont', status);
+  }
+
   // GET y SET del modo de tema
   String get themeMode {
     return _prefs.getString('themeMode') ?? 'light';

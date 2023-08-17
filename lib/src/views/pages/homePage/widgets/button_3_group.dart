@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tecgrupo/src/data/local/user_preferences.dart';
 import 'package:tecgrupo/src/provider/config_provider.dart';
 import 'package:tecgrupo/src/provider/tts_provider.dart';
+import 'package:tecgrupo/src/utils/keys_check.dart';
 
 class Button3Group extends StatelessWidget {
   final String keyA, keyB, keyC;
@@ -13,12 +15,19 @@ class Button3Group extends StatelessWidget {
   Widget build(BuildContext context) {
     final configProvider = Provider.of<ConfigProvider>(context);
     final ttsProvider = Provider.of<TTSProvider>(context, listen: false);
+    final prefs = UserPreferences();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Material(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.black12,
+          color: prefs.highlightFont
+              ? isAConsonantOrVowel(key: keyA) == 'consonant'
+                  ? Colors.orange
+                  : isAConsonantOrVowel(key: keyA) == 'vowel'
+                      ? const Color(0xFF003A70)
+                      : Colors.black12
+              : Colors.black12,
           child: InkWell(
             onTap: () {
               HapticFeedback.lightImpact();
@@ -37,13 +46,14 @@ class Button3Group extends StatelessWidget {
                   fontSize:
                       MediaQuery.of(context).orientation == Orientation.portrait
                           ? MediaQuery.of(context).size.width *
-                              0.68 *
                               configProvider.factorSize!
                           : MediaQuery.of(context).size.height *
-                              0.68 *
                               configProvider.factorSize!,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: prefs.highlightFont &&
+                          isAConsonantOrVowel(key: keyA) != 'other'
+                      ? Colors.white
+                      : const Color(0xFF003A70),
                 ),
               ),
             ),
@@ -56,7 +66,13 @@ class Button3Group extends StatelessWidget {
         ),
         Material(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.black12,
+          color: prefs.highlightFont
+              ? isAConsonantOrVowel(key: keyB) == 'consonant'
+                  ? Colors.orange
+                  : isAConsonantOrVowel(key: keyB) == 'vowel'
+                      ? const Color(0xFF003A70)
+                      : Colors.black12
+              : Colors.black12,
           child: InkWell(
             onTap: () {
               HapticFeedback.lightImpact();
@@ -75,13 +91,14 @@ class Button3Group extends StatelessWidget {
                   fontSize:
                       MediaQuery.of(context).orientation == Orientation.portrait
                           ? MediaQuery.of(context).size.width *
-                              0.68 *
                               configProvider.factorSize!
                           : MediaQuery.of(context).size.height *
-                              0.68 *
                               configProvider.factorSize!,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: prefs.highlightFont &&
+                          isAConsonantOrVowel(key: keyB) != 'other'
+                      ? Colors.white
+                      : const Color(0xFF003A70),
                 ),
               ),
             ),
@@ -94,7 +111,13 @@ class Button3Group extends StatelessWidget {
         ),
         Material(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.black12,
+          color: prefs.highlightFont
+              ? isAConsonantOrVowel(key: keyC) == 'consonant'
+                  ? Colors.orange
+                  : isAConsonantOrVowel(key: keyC) == 'vowel'
+                      ? const Color(0xFF003A70)
+                      : Colors.black12
+              : Colors.black12,
           child: InkWell(
             onTap: () {
               HapticFeedback.lightImpact();
@@ -113,13 +136,14 @@ class Button3Group extends StatelessWidget {
                   fontSize:
                       MediaQuery.of(context).orientation == Orientation.portrait
                           ? MediaQuery.of(context).size.width *
-                              0.68 *
                               configProvider.factorSize!
                           : MediaQuery.of(context).size.height *
-                              0.68 *
                               configProvider.factorSize!,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: prefs.highlightFont &&
+                          isAConsonantOrVowel(key: keyC) != 'other'
+                      ? Colors.white
+                      : const Color(0xFF003A70),
                 ),
               ),
             ),

@@ -10,10 +10,12 @@ class ConfigProvider with ChangeNotifier {
   final prefs = UserPreferences();
   double? _factorSize;
   String? _factorText;
+  bool? _highlightFont;
 
   void initConfig() {
     _factorSize = prefs.factorSize;
     _factorText = prefs.factorText;
+    _highlightFont = prefs.highlightFont;
   }
 
   void setFactorSize(double size, String factorText) {
@@ -25,18 +27,25 @@ class ConfigProvider with ChangeNotifier {
     } else if (factorText == 'predeterminado') {
       prefs.factorText = 'predeterminado';
       _factorText = 'predeterminado';
-      prefs.factorSize = size > mediumScreenSize ? 0.036 : 0.06;
-      _factorSize = size > mediumScreenSize ? 0.036 : 0.06;
+      prefs.factorSize = size > mediumScreenSize ? 0.03 : 0.05;
+      _factorSize = size > mediumScreenSize ? 0.03 : 0.05;
     } else {
       prefs.factorText = 'pequeño';
-      prefs.factorSize = size > mediumScreenSize ? 0.03 : 0.054;
-      _factorSize = size > mediumScreenSize ? 0.03 : 0.054;
+      prefs.factorSize = size > mediumScreenSize ? 0.026 : 0.046;
+      _factorSize = size > mediumScreenSize ? 0.026 : 0.046;
       _factorText = 'pequeño';
     }
 
     notifyListeners();
   }
 
+  void setHighlightFont(bool status) {
+    _highlightFont = status;
+    prefs.highlightFont = status;
+    notifyListeners();
+  }
+
   double? get factorSize => _factorSize;
   String? get factorText => _factorText;
+  bool? get highlightFont => _highlightFont ?? false;
 }
