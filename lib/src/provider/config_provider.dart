@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tecgrupo/src/data/local/user_preferences.dart';
+import 'package:tagrupo/src/data/local/user_preferences.dart';
 
 const int largeScreenSize = 1000;
 const int mediumScreenSize = 680;
@@ -11,11 +11,13 @@ class ConfigProvider with ChangeNotifier {
   double? _factorSize;
   String? _factorText;
   bool? _highlightFont;
+  bool? _highContrast;
 
   void initConfig() {
     _factorSize = prefs.factorSize;
     _factorText = prefs.factorText;
     _highlightFont = prefs.highlightFont;
+    _highContrast = prefs.highContrast;
   }
 
   void setFactorSize(double size, String factorText) {
@@ -45,7 +47,14 @@ class ConfigProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setHighContrast(bool status) {
+    _highContrast = status;
+    prefs.highContrast = status;
+    notifyListeners();
+  }
+
   double? get factorSize => _factorSize;
   String? get factorText => _factorText;
   bool? get highlightFont => _highlightFont ?? false;
+  bool? get highContrast => _highContrast ?? false;
 }

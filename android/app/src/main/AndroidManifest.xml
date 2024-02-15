@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fleni.tecgrupo.tecgrupo">
+    package="com.fleni.tagrupo">
    <application
-        android:label="tecgrupo"
+        android:label="TA Grupo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

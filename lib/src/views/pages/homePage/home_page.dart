@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tecgrupo/src/provider/config_provider.dart';
-import 'package:tecgrupo/src/provider/tts_provider.dart';
-import 'package:tecgrupo/src/utils/transitions.dart';
-import 'package:tecgrupo/src/views/pages/configPage/config_page.dart';
-import 'package:tecgrupo/src/views/pages/homePage/widgets/field_text.dart';
-import 'package:tecgrupo/src/views/pages/homePage/widgets/keys_group.dart';
+import 'package:tagrupo/src/data/local/user_preferences.dart';
+import 'package:tagrupo/src/provider/config_provider.dart';
+import 'package:tagrupo/src/provider/tts_provider.dart';
+import 'package:tagrupo/src/utils/transitions.dart';
+import 'package:tagrupo/src/views/pages/configPage/config_page.dart';
+import 'package:tagrupo/src/views/pages/homePage/widgets/buttons_action.dart';
+import 'package:tagrupo/src/views/pages/homePage/widgets/field_text.dart';
+import 'package:tagrupo/src/views/pages/homePage/widgets/keys_group.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,11 +28,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final configProvider = Provider.of<ConfigProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+      backgroundColor: configProvider.highContrast! ? Colors.black : Colors.white,
+      appBar: MediaQuery.of(context).orientation == Orientation.portrait 
+      ? AppBar(
         title: const Text(
-          'TecGrupo',
+          'TA Grupo',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         backgroundColor: const Color(0xFF003A70),
@@ -52,13 +57,29 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ],
-      ),
+      ) : const PreferredSize(preferredSize: Size.zero, child: SafeArea(child: SizedBox.shrink(),),),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          children: const [
-            FieldTextWidget(),
-            Expanded(child: KeysGroup()),
+          children: [
+            MediaQuery.of(context).orientation != Orientation.portrait
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:  [
+                      const Expanded(child: FieldTextWidget()),
+                      SizedBox(width: MediaQuery.of(context).size.width * 0.04,),
+                      const ButtonsActionWidget()
+                    ],
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const FieldTextWidget(),
+                      SizedBox(height: MediaQuery.of(context).size.width * 0.04,),
+                      const ButtonsActionWidget()
+                    ],
+                  ),
+            const Expanded(child: KeysGroup()),
           ],
         ),
       ),

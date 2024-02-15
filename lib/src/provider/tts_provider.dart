@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:tecgrupo/src/data/local/user_preferences.dart';
+import 'package:tagrupo/src/data/local/user_preferences.dart';
 
 class TTSProvider with ChangeNotifier {
   final String _defaultLanguage = 'en-US';
@@ -37,7 +37,6 @@ class TTSProvider with ChangeNotifier {
       _volume += volume;
       prefs.volume = double.parse(_volume.toStringAsFixed(2));
       await _tts.setVolume(_volume);
-
       notifyListeners();
     }
   }
@@ -48,8 +47,8 @@ class TTSProvider with ChangeNotifier {
       _pitch += pitch;
       prefs.pitch = double.parse(_pitch.toStringAsFixed(2));
       await _tts.setPitch(_pitch);
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   Future<void> setRate(double rate) async {
@@ -58,8 +57,8 @@ class TTSProvider with ChangeNotifier {
       _rate += rate;
       prefs.rate = double.parse(_rate.toStringAsFixed(2));
       await _tts.setSpeechRate(_rate);
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   void setText(String text) {
@@ -73,7 +72,7 @@ class TTSProvider with ChangeNotifier {
   }
 
   void deleteLast() {
-    if (_textToSpeech.length > 0) {
+    if (_textToSpeech.isNotEmpty) {
       _textToSpeech = _textToSpeech.substring(0, textToSpeech.length - 1);
     }
     notifyListeners();

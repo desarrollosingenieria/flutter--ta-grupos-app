@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tecgrupo/src/views/pages/homePage/home_page.dart';
+import 'package:tagrupo/src/views/pages/homePage/home_page.dart';
 
-class TecGrupo extends StatelessWidget {
-  const TecGrupo({super.key});
+class TAGrupo extends StatelessWidget {
+  const TAGrupo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'TecGrupo',
+      title: 'TA Grupo',
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );

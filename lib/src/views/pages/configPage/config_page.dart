@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tecgrupo/src/provider/config_provider.dart';
-import 'package:tecgrupo/src/provider/tts_provider.dart';
+import 'package:tagrupo/src/data/local/user_preferences.dart';
+import 'package:tagrupo/src/provider/config_provider.dart';
+import 'package:tagrupo/src/provider/tts_provider.dart';
 
 class ConfigPage extends StatefulWidget {
   const ConfigPage({super.key});
@@ -17,7 +18,9 @@ class _ConfigPageState extends State<ConfigPage> {
     final configProvider = Provider.of<ConfigProvider>(context);
     Size mq = MediaQuery.of(context).size;
     Orientation orientation = MediaQuery.of(context).orientation;
+    final UserPreferences prefs = UserPreferences();
     return Scaffold(
+      backgroundColor: prefs.highContrast ? Colors.black : Colors.white,
       appBar: AppBar(
         title: const Text(
           'Configuraciones',
@@ -50,7 +53,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               ? mq.width * configProvider.factorSize!
                               : mq.height * configProvider.factorSize!,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF003A70),
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       const Spacer(),
@@ -70,12 +73,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.volume > 0.05
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black : Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_left,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -94,7 +97,7 @@ class _ConfigPageState extends State<ConfigPage> {
                                 ? mq.width * configProvider.factorSize!
                                 : mq.height * configProvider.factorSize!,
                             fontWeight: FontWeight.normal,
-                            color: const Color(0xFF003A70),
+                            color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                           ),
                         ),
                       ),
@@ -114,12 +117,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.volume < 1
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black : Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_right,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -132,7 +135,7 @@ class _ConfigPageState extends State<ConfigPage> {
                 SizedBox(
                   height: orientation == Orientation.portrait
                       ? mq.width * 0.04
-                      : mq.height * 0.02,
+                      : mq.height * 0.04,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -145,7 +148,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               ? mq.width * configProvider.factorSize!
                               : mq.height * configProvider.factorSize!,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF003A70),
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       const Spacer(),
@@ -165,12 +168,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.rate > 0.05
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black : Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_left,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -189,7 +192,7 @@ class _ConfigPageState extends State<ConfigPage> {
                                 ? mq.width * configProvider.factorSize!
                                 : mq.height * configProvider.factorSize!,
                             fontWeight: FontWeight.normal,
-                            color: const Color(0xFF003A70),
+                            color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                           ),
                         ),
                       ),
@@ -209,12 +212,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.rate < 1
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black : Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_right,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -227,10 +230,10 @@ class _ConfigPageState extends State<ConfigPage> {
                 SizedBox(
                   height: orientation == Orientation.portrait
                       ? mq.width * 0.04
-                      : mq.height * 0.02,
+                      : mq.height * 0.04,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
                   child: Row(
                     children: <Widget>[
                       Text(
@@ -240,7 +243,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               ? mq.width * configProvider.factorSize!
                               : mq.height * configProvider.factorSize!,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF003A70),
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       const Spacer(),
@@ -260,12 +263,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.pitch > 0.05
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black :Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_left,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -284,7 +287,7 @@ class _ConfigPageState extends State<ConfigPage> {
                                 ? mq.width * configProvider.factorSize!
                                 : mq.height * configProvider.factorSize!,
                             fontWeight: FontWeight.normal,
-                            color: const Color(0xFF003A70),
+                            color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                           ),
                         ),
                       ),
@@ -304,12 +307,12 @@ class _ConfigPageState extends State<ConfigPage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(500),
                             color: ttsProvider.pitch < 1
-                                ? const Color(0xFF003A70)
-                                : Colors.grey,
+                                ? prefs.highContrast ? Colors.white : const Color(0xFF003A70)
+                                : prefs.highContrast ? Colors.black : Colors.grey,
                           ),
                           child: Icon(
                             Icons.chevron_right,
-                            color: Colors.white,
+                            color: prefs.highContrast ? Colors.black : Colors.white,
                             size: orientation == Orientation.portrait
                                 ? mq.width * 0.06
                                 : mq.height * 0.06,
@@ -328,7 +331,7 @@ class _ConfigPageState extends State<ConfigPage> {
                   alignment: Alignment.center,
                   child: Material(
                     borderRadius: BorderRadius.circular(16),
-                    color: Colors.blue,
+                    color: prefs.highContrast ? Colors.white : Colors.blue,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
                       child: Container(
@@ -338,7 +341,7 @@ class _ConfigPageState extends State<ConfigPage> {
                             : mq.height * 0.6,
                         height: orientation == Orientation.portrait
                             ? mq.width * 0.2
-                            : mq.height * 0.1,
+                            : mq.height * 0.2,
                         child: Text(
                           'Probar voz'.toUpperCase(),
                           style: TextStyle(
@@ -348,7 +351,7 @@ class _ConfigPageState extends State<ConfigPage> {
                                       0.68 *
                                       configProvider.factorSize!,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                              color: prefs.highContrast ? Colors.black : Colors.white,),
                         ),
                       ),
                       onTap: () {
@@ -358,7 +361,7 @@ class _ConfigPageState extends State<ConfigPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 40.0),
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
                   child: Column(
                     children: [
                       Text(
@@ -368,7 +371,7 @@ class _ConfigPageState extends State<ConfigPage> {
                               ? mq.width * configProvider.factorSize!
                               : mq.height * configProvider.factorSize!,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF003A70),
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       SizedBox(
@@ -382,8 +385,8 @@ class _ConfigPageState extends State<ConfigPage> {
                           Material(
                             borderRadius: BorderRadius.circular(16),
                             color: configProvider.factorText! == 'pequeño'
-                                ? Colors.blue
-                                : Colors.grey[400],
+                                ? prefs.highContrast ? Colors.white : Colors.blue
+                                : prefs.highContrast ? Colors.transparent : Colors.grey[400],
                             child: InkWell(
                               onTap: () {
                                 configProvider.setFactorSize(
@@ -391,17 +394,16 @@ class _ConfigPageState extends State<ConfigPage> {
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
                                 padding: const EdgeInsets.all(20),
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Pequeño',
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: orientation ==
-                                            Orientation.portrait
-                                        ? mq.width * configProvider.factorSize!
-                                        : mq.height *
-                                            configProvider.factorSize!,
+                                    color: configProvider.factorText! == 'pequeño' ? prefs.highContrast ? Colors.black : Colors.white : Colors.white,
+                                    fontSize: orientation == Orientation.portrait
+                              ? mq.width * configProvider.factorSize!
+                              : mq.height * configProvider.factorSize!,
                                   ),
                                 ),
                               ),
@@ -416,8 +418,8 @@ class _ConfigPageState extends State<ConfigPage> {
                             borderRadius: BorderRadius.circular(16),
                             color:
                                 configProvider.factorText! == 'predeterminado'
-                                    ? Colors.blue
-                                    : Colors.grey[400],
+                                    ? prefs.highContrast ? Colors.white : Colors.blue
+                                    : prefs.highContrast ? Colors.transparent: Colors.grey[400],
                             child: InkWell(
                               onTap: () {
                                 configProvider.setFactorSize(
@@ -425,12 +427,99 @@ class _ConfigPageState extends State<ConfigPage> {
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
                                 padding: const EdgeInsets.all(20),
                                 alignment: Alignment.center,
                                 child: Text(
                                   'Predeterminado',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: configProvider.factorText! == 'predeterminado' ? prefs.highContrast ? Colors.black : Colors.white : Colors.white,
+                                    fontSize: orientation == Orientation.portrait
+                              ? mq.width * configProvider.factorSize!
+                              : mq.height * configProvider.factorSize!,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: orientation == Orientation.portrait
+                                ? mq.width * 0.02
+                                : mq.height * 0.02,
+                          ),
+                          Material(
+                            borderRadius: BorderRadius.circular(16),
+                            color: configProvider.factorText! == 'grande'
+                                ? prefs.highContrast ? Colors.white : Colors.blue
+                                : prefs.highContrast ? Colors.transparent : Colors.grey[400],
+                            child: InkWell(
+                              onTap: () {
+                                configProvider.setFactorSize(
+                                    mq.width, 'grande');
+                              },
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
+                                padding: const EdgeInsets.all(20),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Grande',
+                                  style: TextStyle(
+                                    color: configProvider.factorText! == 'grande' ? prefs.highContrast ? Colors.black : Colors.white : Colors.white,
+                                    fontSize: orientation == Orientation.portrait
+                              ? mq.width * configProvider.factorSize!
+                              : mq.height * configProvider.factorSize!,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Estilo de teclado',
+                        style: TextStyle(
+                          fontSize: orientation == Orientation.portrait
+                              ? mq.width * configProvider.factorSize!
+                              : mq.height * configProvider.factorSize!,
+                          fontWeight: FontWeight.bold,
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
+                        ),
+                      ),
+                      SizedBox(
+                        height: orientation == Orientation.portrait
+                            ? mq.width * 0.04
+                            : mq.height * 0.04,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Material(
+                            borderRadius: BorderRadius.circular(16),
+                            color: !configProvider.highlightFont!
+                                ? prefs.highContrast ? Colors.white : Colors.blue
+                                : prefs.highContrast ? Colors.transparent: Colors.grey[400],
+                            child: InkWell(
+                              onTap: () {
+                                configProvider.setHighlightFont(false);
+                              },
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
+                                padding: const EdgeInsets.all(20),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Predeterminado',
+                                  style: TextStyle(
+                                    color: !configProvider.highlightFont!
+                                ? prefs.highContrast ? Colors.black : Colors.white : Colors.white,
                                     fontSize: orientation ==
                                             Orientation.portrait
                                         ? mq.width * configProvider.factorSize!
@@ -448,22 +537,23 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.factorText! == 'grande'
-                                ? Colors.blue
-                                : Colors.grey[400],
+                            color: configProvider.highlightFont!
+                                ? prefs.highContrast ? Colors.white : Colors.blue
+                                : prefs.highContrast ? Colors.transparent: Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setFactorSize(
-                                    mq.width, 'grande');
+                                configProvider.setHighlightFont(true);
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
                                 padding: const EdgeInsets.all(20),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Grande',
+                                  'Letras resaltadas',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: configProvider.highlightFont!
+                                ? prefs.highContrast ? Colors.black : Colors.white : Colors.white,
                                     fontSize: orientation ==
                                             Orientation.portrait
                                         ? mq.width * configProvider.factorSize!
@@ -479,18 +569,19 @@ class _ConfigPageState extends State<ConfigPage> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 40.0),
+                
+               Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
                   child: Column(
                     children: [
                       Text(
-                        'Estilo de teclado',
+                        'Diseño de pantalla',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
                               ? mq.width * configProvider.factorSize!
                               : mq.height * configProvider.factorSize!,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF003A70),
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       SizedBox(
@@ -503,15 +594,16 @@ class _ConfigPageState extends State<ConfigPage> {
                         children: <Widget>[
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.highlightFont!
-                                ? Colors.grey[400]
-                                : Colors.blue,
+                            color: configProvider.highContrast!
+                                ? prefs.highContrast ? Colors.transparent : Colors.grey[400]
+                                : prefs.highContrast ? Colors.white : Colors.blue,
                             child: InkWell(
                               onTap: () {
-                                configProvider.setHighlightFont(false);
+                                configProvider.setHighContrast(false);
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
                                 padding: const EdgeInsets.all(20),
                                 alignment: Alignment.center,
                                 child: Text(
@@ -535,21 +627,23 @@ class _ConfigPageState extends State<ConfigPage> {
                           ),
                           Material(
                             borderRadius: BorderRadius.circular(16),
-                            color: configProvider.highlightFont!
-                                ? Colors.blue
-                                : Colors.grey[400],
+                            
+                            color: configProvider.highContrast!
+                                ? prefs.highContrast ? Colors.white : Colors.blue
+                                : prefs.highContrast ? Colors.transparent: Colors.grey[400],
                             child: InkWell(
                               onTap: () {
-                                configProvider.setHighlightFont(true);
+                                configProvider.setHighContrast(true);
                               },
                               borderRadius: BorderRadius.circular(16),
                               child: Container(
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(width: prefs.highContrast ? 2 : 0, color: Colors.white)),
                                 padding: const EdgeInsets.all(20),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'Letras resaltadas',
+                                  'Alto contraste',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: prefs.highContrast ? Colors.black : Colors.white,
                                     fontSize: orientation ==
                                             Orientation.portrait
                                         ? mq.width * configProvider.factorSize!
@@ -578,41 +672,298 @@ class _ConfigPageState extends State<ConfigPage> {
                         'Desarrollado por'.toUpperCase(),
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.02
-                              : mq.height * 0.02,
-                          color: const Color(0xFF003A70),
+                              ? mq.width * 0.6 * configProvider.factorSize!
+                              : mq.height * 0.6 * configProvider.factorSize!,
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
                       SizedBox(
                         height: orientation == Orientation.portrait
                             ? mq.width * 0.02
-                            : mq.height * 0.01,
+                            : mq.height * 0.02,
                       ),
                       Text(
                         'Clínica de Tecnología Asistiva, FLENI',
                         style: TextStyle(
                           fontSize: orientation == Orientation.portrait
-                              ? mq.width * 0.03
-                              : mq.height * 0.03,
-                          color: const Color(0xFF003A70),
+                              ? mq.width * 0.8 * configProvider.factorSize!
+                              : mq.height * 0.8 * configProvider.factorSize!,
+                          color: prefs.highContrast ? Colors.white : const Color(0xFF003A70),
                         ),
                       ),
+                      // SizedBox(
+                      //   height: orientation == Orientation.portrait
+                      //       ? mq.width * 0.08
+                      //       : mq.height * 0.08,
+                      // ),
+                      // Image.asset(
+                      //   'assets/images/fleni-logo.png',
+                      //   width: orientation == Orientation.portrait
+                      //       ? mq.width * 0.6
+                      //       : mq.height * 0.6,
+                      // ),
                       SizedBox(
                         height: orientation == Orientation.portrait
                             ? mq.width * 0.08
                             : mq.height * 0.08,
                       ),
-                      Image.asset(
-                        'assets/images/fleni-logo.png',
-                        width: orientation == Orientation.portrait
-                            ? mq.width * 0.5
-                            : mq.height * 0.5,
-                      ),
-                      SizedBox(
-                        height: orientation == Orientation.portrait
-                            ? mq.width * 0.08
-                            : mq.height * 0.08,
-                      ),
+                    
+                  
+                
+                      // Image.asset(
+                      //   'assets/images/fleni-logo.png',
+                      //   width: orientation == Orientation.portrait
+                      //       ? mq.width * 0.5
+                      //       : mq.height * 0.5,
+                      // ),
+                      // SizedBox(
+                      //   height: orientation == Orientation.portrait
+                      //       ? mq.width * 0.08
+                      //       : mq.height * 0.08,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     IconButton(
+                      //       padding: const EdgeInsets.all(0),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'twitter.com',
+                      //           path: '/FleniOficial',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.xTwitter,
+                      //         size: orientation ==
+                      //                       Orientation.portrait
+                      //                   ? mq.width * 2 *configProvider.factorSize!
+                      //                   : mq.height * 2 *
+                      //                       configProvider.factorSize!,
+                      //         color: ColorApp.brandblue,
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: orientation == Orientation.portrait
+                      //           ? mq.width * 0.04
+                      //           : mq.height * 0.04,
+                      //     ),
+                      //     IconButton(
+                      //       padding: const EdgeInsets.all(0),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'instagram.com',
+                      //           path: '/Fleni_Oficial',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.instagram,
+                      //         size: orientation ==
+                      //                       Orientation.portrait
+                      //                   ? mq.width * 2 *configProvider.factorSize!
+                      //                   : mq.height * 2 *
+                      //                       configProvider.factorSize!,
+                      //         color: ColorApp.brandblue,
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: orientation == Orientation.portrait
+                      //           ? mq.width * 0.04
+                      //           : mq.height * 0.04,
+                      //     ),
+                      //     IconButton(
+                      //       padding: const EdgeInsets.all(0),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'facebook.com',
+                      //           path: '/FleniOficial',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.facebook,
+                      //         size: orientation ==
+                      //                       Orientation.portrait
+                      //                   ? mq.width *2 * configProvider.factorSize!
+                      //                   : mq.height * 2 *
+                      //                       configProvider.factorSize!,
+                      //         color: ColorApp.brandblue,
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: orientation == Orientation.portrait
+                      //           ? mq.width * 0.04
+                      //           : mq.height * 0.04,
+                      //     ),
+                      //     IconButton(
+                      //       padding: const EdgeInsets.all(0),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'youtube.comm',
+                      //           path: '/user/InfoFLENI',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.youtube,
+                      //         size: orientation ==
+                      //                       Orientation.portrait
+                      //                   ? mq.width * 2 *configProvider.factorSize!
+                      //                   : mq.height * 2 *
+                      //                       configProvider.factorSize!,
+                      //         color: ColorApp.brandblue,
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: orientation == Orientation.portrait
+                      //           ? mq.width * 0.04
+                      //           : mq.height * 0.04,
+                      //     ),
+                      //     IconButton(
+                      //       padding: const EdgeInsets.all(0),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'api.whatsapp.com',
+                      //           path:
+                      //               '/send/?phone=541156551155&text&type=phone_number&app_absent=0',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.whatsapp,
+                      //         size: orientation ==
+                      //                       Orientation.portrait
+                      //                   ? mq.width *2 * configProvider.factorSize!
+                      //                   : mq.height * 2 *
+                      //                       configProvider.factorSize!,
+                      //         color: ColorApp.brandblue,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(
+                      //   height: orientation == Orientation.portrait
+                      //       ? mq.width * 0.04
+                      //       : mq.height * 0.04,
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(bottom: 20.0),
+                      //   child: Container(
+                      //     width: double.infinity,
+                      //     child: TextButton(
+                      //       style: ButtonStyle(
+                      //         foregroundColor: MaterialStateProperty.all<Color>(
+                      //             ColorApp.primaryLight),
+                      //         shape: MaterialStateProperty.all<OutlinedBorder>(
+                      //             StadiumBorder()),
+                      //         backgroundColor: MaterialStateProperty.all<Color>(
+                      //             ColorApp.brandblue),
+                      //         padding:
+                      //             MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      //                 EdgeInsets.symmetric(horizontal: 20)),
+                      //       ),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'fleni.org.ar',
+                      //           path: '/',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.all(30.0),
+                      //         child: Text(
+                      //           'Página web',
+                      //           style: TextStyle(color: Colors.white,
+                      //                 fontSize: orientation ==
+                      //                         Orientation.portrait
+                      //                     ? mq.width * configProvider.factorSize!
+                      //                     : mq.height *
+                      //                         configProvider.factorSize!,),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(bottom: 20),
+                      //   child: Container(
+                      //     width: double.infinity,
+                      //     child: TextButton(
+                      //       style: ButtonStyle(
+                      //         foregroundColor: MaterialStateProperty.all<Color>(
+                      //             ColorApp.primaryLight),
+                      //         shape: MaterialStateProperty.all<OutlinedBorder>(
+                      //             StadiumBorder( side: BorderSide(width: 4, color: ColorApp.brandblue))),
+                      //         backgroundColor: MaterialStateProperty.all<Color>(
+                      //             Colors.transparent),
+                                
+                      //         padding:
+                      //             MaterialStateProperty.all<EdgeInsetsGeometry>(
+                      //                 EdgeInsets.symmetric(horizontal: 20)),
+                      //       ),
+                      //       onPressed: () async {
+                      //         final Uri url = Uri(
+                      //           scheme: 'https',
+                      //           host: 'fleni.org.ar',
+                      //           path: '/institucional/donar/',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           await launchUrl(url,
+                      //               mode: LaunchMode.externalApplication);
+                      //         } else {
+                      //           throw 'Could not launch $url';
+                      //         }
+                      //       },
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.all(30.0),
+                      //         child: Text('Donar',
+                      //             style: TextStyle(color: ColorApp.brandblue,
+                      //                 fontSize: orientation ==
+                      //                         Orientation.portrait
+                      //                     ? mq.width * configProvider.factorSize!
+                      //                     : mq.height *
+                      //                         configProvider.factorSize!,),),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

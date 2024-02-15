@@ -1,5 +1,5 @@
-name: tecgrupo
-description: A new Flutter project.
+name: tagrupo
+description: Desarrollo de Ingeniería. Clínica de Tecnología Asistiva, FLENI
 publish_to: 'none' 
 version: 1.0.0+1
 
@@ -14,6 +14,9 @@ dependencies:
   shared_preferences: ^2.1.0
   path_provider: ^2.0.14
   flutter_tts: ^3.6.3
+  url_launcher: ^6.2.1
+  font_awesome_flutter: ^10.6.0
+  
   
 
 dev_dependencies:
