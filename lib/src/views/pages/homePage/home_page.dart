@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tagrupo/src/data/local/user_preferences.dart';
 import 'package:tagrupo/src/provider/config_provider.dart';
 import 'package:tagrupo/src/provider/tts_provider.dart';
 import 'package:tagrupo/src/utils/transitions.dart';
@@ -31,33 +30,41 @@ class _HomePageState extends State<HomePage> {
     final configProvider = Provider.of<ConfigProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: configProvider.highContrast! ? Colors.black : Colors.white,
-      appBar: MediaQuery.of(context).orientation == Orientation.portrait 
-      ? AppBar(
-        title: const Text(
-          'TA Grupo',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-        backgroundColor: const Color(0xFF003A70),
-        centerTitle: true,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                FadeTransitionRoute(
-                  widget: const ConfigPage(),
+      backgroundColor:
+          configProvider.highContrast! ? Colors.black : Colors.white,
+      appBar: MediaQuery.of(context).orientation == Orientation.portrait
+          ? AppBar(
+              title: const Text(
+                'TA Grupo',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              backgroundColor: const Color(0xFF003A70),
+              centerTitle: true,
+              elevation: 0,
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      FadeTransitionRoute(
+                        widget: const ConfigPage(),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-        ],
-      ) : const PreferredSize(preferredSize: Size.zero, child: SafeArea(child: SizedBox.shrink(),),),
+              ],
+            )
+          : const PreferredSize(
+              preferredSize: Size.zero,
+              child: SafeArea(
+                child: SizedBox.shrink(),
+              ),
+            ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -65,9 +72,11 @@ class _HomePageState extends State<HomePage> {
             MediaQuery.of(context).orientation != Orientation.portrait
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children:  [
+                    children: [
                       const Expanded(child: FieldTextWidget()),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.04,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.04,
+                      ),
                       const ButtonsActionWidget()
                     ],
                   )
@@ -75,7 +84,9 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const FieldTextWidget(),
-                      SizedBox(height: MediaQuery.of(context).size.width * 0.04,),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.width * 0.04,
+                      ),
                       const ButtonsActionWidget()
                     ],
                   ),

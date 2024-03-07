@@ -26,7 +26,7 @@ class UserPreferences {
 
   // GET y SET de rate
   double get rate {
-    return _prefs.getDouble('rate') ?? 1.0;
+    return _prefs.getDouble('rate') ?? 0.5;
   }
 
   set rate(double value) {
