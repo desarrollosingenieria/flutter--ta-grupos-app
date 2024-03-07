@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tagrupo/src/provider/config_provider.dart';
-import 'package:tagrupo/src/provider/tts_provider.dart';
 import 'package:tagrupo/src/utils/transitions.dart';
 import 'package:tagrupo/src/views/pages/configPage/config_page.dart';
 import 'package:tagrupo/src/views/pages/homePage/widgets/buttons_action.dart';
 import 'package:tagrupo/src/views/pages/homePage/widgets/field_text.dart';
 import 'package:tagrupo/src/views/pages/homePage/widgets/keys_group.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    final ttsProvider = Provider.of<TTSProvider>(context, listen: false);
-    ttsProvider.initLanguages();
-    final configProvider = Provider.of<ConfigProvider>(context, listen: false);
-    configProvider.initConfig();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final configProvider = Provider.of<ConfigProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appConfig = ref.watch(configProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:
-          configProvider.highContrast! ? Colors.black : Colors.white,
+      backgroundColor: appConfig.highContrast ? Colors.black : Colors.white,
       appBar: MediaQuery.of(context).orientation == Orientation.portrait
           ? AppBar(
               title: const Text(

@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:tagrupo/src/data/local/user_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tagrupo/src/provider/config_provider.dart';
-import 'package:tagrupo/src/provider/tts_provider.dart';
 
-class SpaceButton extends StatelessWidget {
+class SpaceButton extends ConsumerWidget {
   const SpaceButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final configProvider = Provider.of<ConfigProvider>(context);
-    final ttsProvider = Provider.of<TTSProvider>(context, listen: false);
-    final prefs = UserPreferences();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appConfig = ref.watch(configProvider);
     return Material(
       borderRadius: BorderRadius.circular(16),
-      color: prefs.highContrast ? Colors.white : Colors.black12,
+      color: appConfig.highContrast ? Colors.white : Colors.black12,
       child: InkWell(
         onTap: () {
           HapticFeedback.lightImpact();
-          ttsProvider.setText(' ');
+          ref.read(configProvider.notifier).setText(' ');
         },
         borderRadius: BorderRadius.circular(16),
         child: Container(
@@ -36,10 +32,10 @@ class SpaceButton extends StatelessWidget {
                   MediaQuery.of(context).orientation == Orientation.portrait
                       ? MediaQuery.of(context).size.width *
                           0.68 *
-                          configProvider.factorSize!
+                          appConfig.factorSize
                       : MediaQuery.of(context).size.height *
                           0.68 *
-                          configProvider.factorSize!,
+                          appConfig.factorSize,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
