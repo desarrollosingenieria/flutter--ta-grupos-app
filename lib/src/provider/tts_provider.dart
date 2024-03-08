@@ -21,7 +21,6 @@ class AppTTS extends _$AppTTS {
   Future<void> speak(String text) async {
     final appConfig = ref.watch(configProvider);
     await state.setVolume(appConfig.ttsVolume);
-    print(appConfig.ttsPitch);
     await state.setPitch(appConfig.ttsPitch);
     await state.setSpeechRate(appConfig.ttsRate);
     await state.speak(text);
