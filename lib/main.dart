@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tagrupo/src/app.dart';
-import 'package:tagrupo/src/data/local/user_preferences.dart';
+import 'package:tagrupos/src/app.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // pantalla completa
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  // orientacion vertical
-  //await SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-  // statusbar transparente
-
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-
-  final prefs = UserPreferences();
-  await prefs.initPrefs();
-  runApp(
-    const ProviderScope(child: TAGrupo()),
-  );
+  await Hive.initFlutter();
+  await Hive.openBox('appParameters');
+  await Hive.openBox('voiceParameters');
+  runApp(const ProviderScope(child: TAGrupos(),),);
 }
+
+
