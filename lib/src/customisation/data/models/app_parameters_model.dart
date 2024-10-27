@@ -6,12 +6,14 @@ class AppParametersModel extends AppParameters {
       {required super.factorSize,
       required super.factorText,
       required super.keyboardStyle,
+      required super.fontStyle,
       required super.highContrast});
 
   static AppParametersModel empty = AppParametersModel(
     factorSize: 0.03,
     factorText: FACTOR_TEXT_DEFAULT,
     keyboardStyle: DEFAULT_KEYBOARD_STYLE,
+    fontStyle: DEFAULT_FONT_STYLE,
     highContrast: false,
   );
 
@@ -20,10 +22,12 @@ class AppParametersModel extends AppParameters {
     String? factorText,
     String? keyboardStyle,
     bool? highContrast,
+    String? fontStyle,
   }) =>
       AppParametersModel(
           factorSize: factorSize ?? this.factorSize,
           factorText: factorText ?? this.factorText,
+          fontStyle: fontStyle ?? this.fontStyle,
           keyboardStyle: keyboardStyle ?? this.keyboardStyle,
           highContrast: highContrast ?? this.highContrast);
 
@@ -31,6 +35,7 @@ class AppParametersModel extends AppParameters {
         'factorSize': factorSize,
         'factorText': factorText,
         'keyboardStyle': keyboardStyle,
+        'fontStyle': fontStyle,
         'highContrast': highContrast,
       };
 
@@ -38,6 +43,7 @@ class AppParametersModel extends AppParameters {
       AppParametersModel(
         factorSize: json['factorSize'],
         factorText: json['factorText'],
+        fontStyle: json['fontStyle'],
         keyboardStyle: json['keyboardStyle'],
         highContrast: json['highContrast'],
       );
@@ -46,6 +52,7 @@ class AppParametersModel extends AppParameters {
       AppParametersModel(
         factorSize: entity.factorSize,
         factorText: entity.factorText,
+        fontStyle: entity.fontStyle,
         keyboardStyle: entity.keyboardStyle,
         highContrast: entity.highContrast,
       );

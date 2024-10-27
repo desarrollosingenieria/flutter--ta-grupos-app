@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stroke_text/stroke_text.dart';
 import 'package:tagrupos/core/constants/constants.dart';
 import 'package:tagrupos/core/utils/utils.dart';
 import 'package:tagrupos/src/communication/presentation/providers/voice_controller.dart';
@@ -15,8 +16,7 @@ class CustomButton extends ConsumerWidget {
     final appParameters = ref.watch(customisationControllerProvider);
     return Material(
       borderRadius: BorderRadius.circular(16),
-      color: 
-      appParameters.keyboardStyle == HIGHLIGHT_KEYBOARD_STYLE
+      color: appParameters.keyboardStyle == HIGHLIGHT_KEYBOARD_STYLE
           ? isAConsonantOrVowel(key: letter) == 'consonant'
               ? appParameters.highContrast
                   ? Colors.yellow
@@ -45,26 +45,63 @@ class CustomButton extends ConsumerWidget {
               ? MediaQuery.of(context).size.width * 0.14
               : MediaQuery.of(context).size.height * 0.10,
           alignment: Alignment.center,
-          child: Text(
-            letter.toUpperCase(),
-            style: TextStyle(
-              fontSize: 
-              MediaQuery.of(context).orientation ==
-                      Orientation.portrait
-                  ? MediaQuery.of(context).size.width * appParameters.factorSize
-                  : MediaQuery.of(context).size.height * appParameters.factorSize,
-              fontWeight: FontWeight.bold,
-              color: 
-              appParameters.keyboardStyle == HIGHLIGHT_KEYBOARD_STYLE &&
-                      isAConsonantOrVowel(key: letter) != 'other'
-                  ? appParameters.highContrast
-                      ? Colors.black
-                      : Colors.white
-                  : appParameters.highContrast
-                      ? Colors.black
-                      : const Color(0xFF003A70),
-            ),
-          ),
+          child: appParameters.fontStyle == HIGHLIGHT_FONT_STYLE
+              ? StrokeText(
+                  text: letter.toUpperCase(),
+                  strokeColor: appParameters.highContrast
+                      ? appParameters.keyboardStyle == HIGHLIGHT_KEYBOARD_STYLE
+                          ? isAConsonantOrVowel(key: letter) == 'vowel'
+                              ? Colors.white
+                              : Colors.orange
+                          : Colors.orange
+                      : appParameters.keyboardStyle == HIGHLIGHT_KEYBOARD_STYLE
+                          ? isAConsonantOrVowel(key: letter) == 'vowel'
+                              ? Colors.orange
+                              : isAConsonantOrVowel(key: letter) == 'other'
+                                  ? Colors.orange
+                                  : const Color(0xFF003A70)
+                          : Colors.orange,
+                  strokeWidth: appParameters.factorSize * 85,
+                  textStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? MediaQuery.of(context).size.width *
+                            appParameters.factorSize
+                        : MediaQuery.of(context).size.height *
+                            appParameters.factorSize,
+                    fontWeight: FontWeight.bold,
+                    color: appParameters.keyboardStyle ==
+                                HIGHLIGHT_KEYBOARD_STYLE &&
+                            isAConsonantOrVowel(key: letter) != 'other'
+                        ? appParameters.highContrast
+                            ? Colors.black
+                            : Colors.white
+                        : appParameters.highContrast
+                            ? Colors.black
+                            : const Color(0xFF003A70),
+                  ),
+                )
+              : Text(
+                  letter.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? MediaQuery.of(context).size.width *
+                            appParameters.factorSize
+                        : MediaQuery.of(context).size.height *
+                            appParameters.factorSize,
+                    fontWeight: FontWeight.bold,
+                    color: appParameters.keyboardStyle ==
+                                HIGHLIGHT_KEYBOARD_STYLE &&
+                            isAConsonantOrVowel(key: letter) != 'other'
+                        ? appParameters.highContrast
+                            ? Colors.black
+                            : Colors.white
+                        : appParameters.highContrast
+                            ? Colors.black
+                            : const Color(0xFF003A70),
+                  ),
+                ),
         ),
       ),
     );

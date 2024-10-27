@@ -21,6 +21,7 @@ class CustomisationController extends _$CustomisationController {
       highContrast: highContrast,
       factorSize: state.factorSize,
       factorText: state.factorText,
+      fontStyle: state.fontStyle,
       keyboardStyle: state.keyboardStyle,
     );
     state = parameters;
@@ -32,7 +33,20 @@ class CustomisationController extends _$CustomisationController {
       highContrast: state.highContrast,
       factorSize: state.factorSize,
       factorText: state.factorText,
+      fontStyle: state.fontStyle,
       keyboardStyle: keyboardStyle,
+    );
+    state = parameters;
+    return customisationService.setAppParameters(parameters);
+  }
+
+  Future<bool> setFontStyle({required String fontStyle}) async {
+    final AppParameters parameters = AppParameters(
+      highContrast: state.highContrast,
+      factorSize: state.factorSize,
+      factorText: state.factorText,
+      fontStyle: fontStyle,
+      keyboardStyle: state.keyboardStyle,
     );
     state = parameters;
     return customisationService.setAppParameters(parameters);
@@ -40,22 +54,30 @@ class CustomisationController extends _$CustomisationController {
 
   Future<bool> setFactorText(
       {required double size, required String factorText}) async {
-    final double factorSize = factorText == FACTOR_TEXT_SMALL
-        ? size > MEDIUM_SCREEN_SIZE
-            ? 0.03
-            : 0.054
-        : factorText == FACTOR_TEXT_DEFAULT
-            ? size > MEDIUM_SCREEN_SIZE
-                ? 0.036
-                : 0.06
-            : size > MEDIUM_SCREEN_SIZE
-                ? 0.04
-                : 0.08;
+    double factorSize;
+    switch (factorText) {
+      case FACTOR_TEXT_SMALL:
+        factorSize = size > MEDIUM_SCREEN_SIZE ? 0.03 : 0.054;
+        break;
+      case FACTOR_TEXT_DEFAULT:
+        factorSize = size > MEDIUM_SCREEN_SIZE ? 0.036 : 0.06;
+        break;
+      case FACTOR_TEXT_BIG:
+        factorSize = size > MEDIUM_SCREEN_SIZE ? 0.04 : 0.08;
+        break;
+      case FACTOR_TEXT_EXTRA_BIG:
+        factorSize = size > MEDIUM_SCREEN_SIZE ? 0.06 : 0.1;
+        break;
+      default:
+        factorSize = size > MEDIUM_SCREEN_SIZE ? 0.036 : 0.06;
+        break;
+    }
 
     final AppParameters parameters = AppParameters(
       highContrast: state.highContrast,
       factorSize: factorSize,
       factorText: factorText,
+      fontStyle: state.fontStyle,
       keyboardStyle: state.keyboardStyle,
     );
 

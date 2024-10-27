@@ -70,7 +70,9 @@ class ConfigPage extends ConsumerWidget {
                 },
               ),
               const VoiceButtonWidget(),
-              const SizedBox(height: 60,),
+              const SizedBox(
+                height: 60,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Column(
@@ -81,20 +83,43 @@ class ConfigPage extends ConsumerWidget {
                     AppParameterWidget(
                       option: DEFAULT_KEYBOARD_STYLE,
                       parameter: appParameters.keyboardStyle,
-                      onTap: () 
-                      => ref
+                      onTap: () => ref
                           .read(customisationControllerProvider.notifier)
-                          .setKeyboardStyle(keyboardStyle: DEFAULT_KEYBOARD_STYLE),
+                          .setKeyboardStyle(
+                              keyboardStyle: DEFAULT_KEYBOARD_STYLE),
                     ),
                     AppParameterWidget(
                       option: HIGHLIGHT_KEYBOARD_STYLE,
                       parameter: appParameters.keyboardStyle,
-                      onTap: () 
-                      => ref
+                      onTap: () => ref
                           .read(customisationControllerProvider.notifier)
-                          .setKeyboardStyle(keyboardStyle: HIGHLIGHT_KEYBOARD_STYLE),
+                          .setKeyboardStyle(
+                              keyboardStyle: HIGHLIGHT_KEYBOARD_STYLE),
                     ),
-                    
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Column(
+                  children: [
+                    const TitleSectionWidget(
+                      title: FONT_STYLE_TITLE,
+                    ),
+                    AppParameterWidget(
+                      option: DEFAULT_FONT_STYLE,
+                      parameter: appParameters.fontStyle,
+                      onTap: () => ref
+                          .read(customisationControllerProvider.notifier)
+                          .setFontStyle(fontStyle: DEFAULT_FONT_STYLE),
+                    ),
+                    AppParameterWidget(
+                      option: HIGHLIGHT_FONT_STYLE,
+                      parameter: appParameters.fontStyle,
+                      onTap: () => ref
+                          .read(customisationControllerProvider.notifier)
+                          .setFontStyle(fontStyle: HIGHLIGHT_FONT_STYLE),
+                    ),
                   ],
                 ),
               ),
@@ -131,6 +156,15 @@ class ConfigPage extends ConsumerWidget {
                           .setFactorText(
                               size: MediaQuery.of(context).size.width,
                               factorText: FACTOR_TEXT_BIG),
+                    ),
+                    AppParameterWidget(
+                      option: FACTOR_TEXT_EXTRA_BIG,
+                      parameter: appParameters.factorText,
+                      onTap: () => ref
+                          .read(customisationControllerProvider.notifier)
+                          .setFactorText(
+                              size: MediaQuery.of(context).size.width,
+                              factorText: FACTOR_TEXT_EXTRA_BIG),
                     ),
                   ],
                 ),

@@ -30,11 +30,17 @@ const String KEYBOARD_STYLE_TITLE = 'Estilo de teclado';
 const String DEFAULT_KEYBOARD_STYLE = 'Predeterminado';
 const String HIGHLIGHT_KEYBOARD_STYLE = 'Letras resaltadas';
 
+// font styles
+const String FONT_STYLE_TITLE = 'Estilo de fuente';
+const String DEFAULT_FONT_STYLE = 'Predeterminado';
+const String HIGHLIGHT_FONT_STYLE = 'Fuente resaltada';
+
 // text sizes
 const String FACTOR_TEXT_TITLE = 'Tamaño de texto';
 const String FACTOR_TEXT_SMALL = 'Texto pequeño';
 const String FACTOR_TEXT_DEFAULT = 'Texto predeterminado';
 const String FACTOR_TEXT_BIG = 'Texto grande';
+const String FACTOR_TEXT_EXTRA_BIG = 'Texto muy grande';
 
 // design
 const String DESIGN_TITLE = 'Diseño de pantalla';
